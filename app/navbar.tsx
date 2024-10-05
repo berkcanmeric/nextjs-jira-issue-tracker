@@ -6,7 +6,7 @@ import React from 'react';
 import { FaBug } from 'react-icons/fa';
 import classnames from 'classnames';
 
-const navbar = () => {
+const NavBar = () => {
   const currentPath = usePathname();
   const links = [
     { name: 'Dashboard', href: '/' },
@@ -37,4 +37,4 @@ const navbar = () => {
   );
 };
 
-export default navbar;
+export default NavBar;

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Callout, TextArea, TextField, Text } from '@radix-ui/themes';
+import { Button, Callout, TextField } from '@radix-ui/themes';
 import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
@@ -39,6 +39,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       if (issue) await axios.patch(`/api/issues/${issue.id}`, data);
       else await axios.post('/api/issues', data);
       router.push('/issues');
+      router.refresh();
     } catch (error) {
       setSubmitting(false);
       setError('An unexpected error occurred.');
