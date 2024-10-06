@@ -52,16 +52,16 @@ const NavBar = () => {
               <DropdownMenu.Root>
                 <DropdownMenu.Trigger>
                   <Avatar
-                    src={session.user?.image || undefined}
-                    fallback={session.user?.name?.[0].toUpperCase() || '?'}
+                    src={session.user?.image!}
+                    fallback='?'
                     size='3'
                     radius='full'
                     className='cursor-pointer'
+                    referrerPolicy='no-referrer'
                   />
                 </DropdownMenu.Trigger>
                 <DropdownMenu.Content sideOffset={5}>
                   <DropdownMenu.Label>
-               
                     <Text size='2' color='gray'>
                       {session.user?.email}
                     </Text>
