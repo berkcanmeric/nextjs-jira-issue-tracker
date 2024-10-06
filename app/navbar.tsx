@@ -5,9 +5,12 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 import { FaBug } from 'react-icons/fa';
 import classnames from 'classnames';
+import { useSession } from 'next-auth/react';
+import { Box, DropdownMenu, Avatar } from '@radix-ui/themes';
 
 const NavBar = () => {
   const currentPath = usePathname();
+  const { status, data: session } = useSession();
   const links = [
     { name: 'Dashboard', href: '/' },
     { name: 'Issues', href: '/issues/list' },
@@ -33,6 +36,28 @@ const NavBar = () => {
           </li>
         ))}
       </ul>
+      <Box>
+        {status === 'authenticated' && (
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger>
+              <Avatar
+                src='https://github.com/shadcn.png'
+                fallback='?'
+                size='3'
+                radius='full'
+              />
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Content>
+              <DropdownMenu.Item>
+                <Link href='/api/auth/signout'>Logout</Link>
+              </DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu.Root>
+        )}
+        {status === 'unauthenticated' && (
+          <Link href='/api/auth/signin'>Login</Link>
+        )}
+      </Box>
     </nav>
   );
 };
